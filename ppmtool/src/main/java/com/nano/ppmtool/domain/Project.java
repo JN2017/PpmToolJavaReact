@@ -30,10 +30,11 @@ public class Project {
 	@NotBlank(message = "Project description is required")
 	private String description;
 	@JsonFormat(pattern="yyyy-mm-dd")
-	private Date startDate;
+	private Date start_date;
 	@JsonFormat(pattern="yyyy-mm-dd")
-	private Date endDate;
+	private Date end_date;
 	@JsonFormat(pattern="yyyy-mm-dd")
+	@Column(updatable=false)
 	private Date create_At;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date update_At;
@@ -84,22 +85,6 @@ public class Project {
 		this.description = description;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 	public Date getCreate_At() {
 		return create_At;
 	}
@@ -114,6 +99,22 @@ public class Project {
 
 	public void setUpdate_At(Date update_At) {
 		this.update_At = update_At;
+	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
 	}
 	
 	

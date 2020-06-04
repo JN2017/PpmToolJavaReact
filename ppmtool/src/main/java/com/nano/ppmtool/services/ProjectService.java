@@ -3,8 +3,10 @@ package com.nano.ppmtool.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nano.ppmtool.domain.Backlog;
 import com.nano.ppmtool.domain.Project;
 import com.nano.ppmtool.exceptions.ProjectIdException;
+import com.nano.ppmtool.repositories.BacklogRepository;
 import com.nano.ppmtool.repositories.ProjectRepository;
 
 @Service
@@ -12,12 +14,25 @@ public class ProjectService {
 	
 	@Autowired
 	private ProjectRepository projectRepository;
+	@Autowired
+	private BacklogRepository backlogRepository;
 	
 	public Project saveOrUpdateProject(Project project) {
 		
 		//Logic
 		try {
 			project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+			
+			if (project.getId() == null) {
+				Backlog backlog = new Backlog();
+				project.setBacklog(backlog);
+				backlog.setProject(project);
+				backlog.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+			}
+			if (project.getId() != null) {
+				project.setBacklog(backlogRepository.findByProjectIdentifier(project.getProjectIdentifier().toUpperCase()));
+			}
+			
 			return projectRepository.save(project);
 		}catch(Exception e) {
 			throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase()+"' already exists!!");

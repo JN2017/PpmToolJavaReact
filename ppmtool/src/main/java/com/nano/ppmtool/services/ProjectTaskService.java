@@ -1,6 +1,8 @@
 package com.nano.ppmtool.services;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +61,49 @@ public class ProjectTaskService {
 			throw new ProjectNotFoundException("Project ID: '"+ id + "' does not exist!");
 		}
 		
-		return projectTaskRepository.findByProjectIdentifierOrderByPriority(id);
-		 
+		return projectTaskRepository.findByProjectIdentifierOrderByPriority(id); 
+	}
+	
+	public ProjectTask findPTByProjectSequence(String backlog_id, String pt_id) {
+		//Make sure we are searching on the right backlog
+		Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
+		if (backlog == null) {
+			throw new ProjectNotFoundException("Project ID: '"+ backlog_id + "' does not exist!");
+		}
+		//Make that our task exists
+		ProjectTask projectTask = projectTaskRepository.findByprojectSequence(pt_id);
+		if(projectTask == null) {
+			throw new ProjectNotFoundException("Project Task: '"+ pt_id + "' not found!");
+		}
+		//Make sure that backlog/Project id in the path corresponds to the right project 
+		if (!projectTask.getProjectIdentifier().equals(backlog_id)) {
+			throw new ProjectNotFoundException("Project Task: '"+ pt_id + "' does not exist in project:  '"+ backlog_id + "' !");
+		}
+		return projectTask;
+	}
+	
+	
+		//update project task
+		//find existing project task
+		//replace it with updated task
+		//save update
+	public ProjectTask updateByProjectSequence(ProjectTask updateTask, String backlog_id, String pt_id) {
+		ProjectTask projectTask = findPTByProjectSequence(backlog_id,pt_id);
+		projectTask=updateTask;
+		
+		return projectTaskRepository.save(projectTask);
+	}
+	
+	public void deleteProjectTaskBySequence(String backlog_id, String pt_id) {
+		ProjectTask projectTask = findPTByProjectSequence(backlog_id,pt_id);
+		
+//		Backlog backlog= projectTask.getBacklog();
+//		List<ProjectTask> pts = backlog.getProjectTasks() ;
+//		pts.remove(projectTask);
+//		backlogRepository.save(backlog);
+		// Removed due to cascade.refresh from the owning side which is the projectTask
+		
+		
+		projectTaskRepository.delete(projectTask);
 	}
 }

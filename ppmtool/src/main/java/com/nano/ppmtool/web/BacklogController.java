@@ -1,6 +1,5 @@
 package com.nano.ppmtool.web;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

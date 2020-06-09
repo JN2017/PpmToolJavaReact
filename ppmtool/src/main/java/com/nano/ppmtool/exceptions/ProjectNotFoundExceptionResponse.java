@@ -2,20 +2,27 @@ package com.nano.ppmtool.exceptions;
 
 public class ProjectNotFoundExceptionResponse {
 
-	private String projectNoFound;
+	private String projectNotFound;
 
-	public ProjectNotFoundExceptionResponse(String projectNoFound) {
+	
+
+	public ProjectNotFoundExceptionResponse(String projectNotFound) {
 		super();
-		this.projectNoFound = projectNoFound;
+		this.projectNotFound = projectNotFound;
 	}
 
-	public String getProjectNoFound() {
-		return projectNoFound;
+
+
+	public String getProjectNotFound() {
+		return projectNotFound;
 	}
 
-	public void setProjectNoFound(String projectNoFound) {
-		this.projectNoFound = projectNoFound;
+
+
+	public void setProjectNotFound(String projectNotFound) {
+		this.projectNotFound = projectNotFound;
 	}
+	
 	
 	
 }

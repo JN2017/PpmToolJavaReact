@@ -22,14 +22,15 @@ public class ProjectService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public Project saveOrUpdateProject(Project project,String username) {
+	public Project saveOrUpdateProject(Project project,String username) { 
 	
-	// Check if the project to update is owner by the token.username
+	// Check if the project to update is owned by the token.username
 	if (project.getId()!= null) {
 		Project existingProject = projectRepository.findByProjectIdentifier(project.getProjectIdentifier());
 	
 	if(existingProject != null &&(!existingProject.getProjectLeader().equals(username))) {
 		throw new ProjectNotFoundException("Project not found in your account!");
+		//check if database  id exists before updating
 	}else if (existingProject == null) {
 		throw new ProjectNotFoundException("Project with ID: '"+ project.getProjectIdentifier()+"' cannot be update because it doesn't exist!");
 		}

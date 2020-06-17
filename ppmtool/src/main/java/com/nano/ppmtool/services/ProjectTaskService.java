@@ -6,21 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nano.ppmtool.domain.Backlog;
-import com.nano.ppmtool.domain.Project;
 import com.nano.ppmtool.domain.ProjectTask;
 import com.nano.ppmtool.exceptions.ProjectNotFoundException;
-import com.nano.ppmtool.repositories.BacklogRepository;
-import com.nano.ppmtool.repositories.ProjectRepository;
 import com.nano.ppmtool.repositories.ProjectTaskRepository;
 
 @Service
 public class ProjectTaskService {
-	@Autowired
-	private BacklogRepository backlogRepository;
+	//@Autowired
+	//private BacklogRepository backlogRepository;
 	@Autowired
 	private ProjectTaskRepository projectTaskRepository;
-	@Autowired
-	private ProjectRepository projectRepository;
+	//@Autowired
+	//private ProjectRepository projectRepository;
 	@Autowired
 	private ProjectService projectService;
 	

@@ -20,6 +20,13 @@ class Register extends Component {
   }
 
   //life cycle hooks
+  // if token valid always navigate to dashboard
+  componentDidMount() {
+    if (this.props.security.validToken) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -128,10 +135,12 @@ class Register extends Component {
 Register.propTypes = {
   createNewUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  security: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
+  security: state.security,
 });
 
 export default connect(mapStateToProps, { createNewUser })(Register);

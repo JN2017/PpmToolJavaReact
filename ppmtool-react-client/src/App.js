@@ -33,7 +33,7 @@ if (jwtToken) {
   if (decoded_jwtToken.exp < currentTime) {
     //Handle the logout
     store.dispatch(logout());
-    window.location.href("/");
+    window.location.href = "/";
   }
 }
 //end of region

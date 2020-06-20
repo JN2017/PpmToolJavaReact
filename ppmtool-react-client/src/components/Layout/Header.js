@@ -32,7 +32,7 @@ class Header extends Component {
           <li className="nav-item">
             <Link
               className="nav-link"
-              to="/login"
+              to="/logout"
               onClick={this.logout.bind(this)}
             >
               Logout
@@ -47,7 +47,6 @@ class Header extends Component {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-item" to="/register">
-              <i className="fas fa-user-circle mr-1" />
               Sign Up
             </Link>
           </li>
